@@ -1,64 +1,64 @@
-**Oyun Akışı ve Durum Yönetimi**
+**Game Flow and State Management**
 
-1. **GameInstaller Sınıfı**:
-   - `GameInstaller` sınıfı, oyunun ana yapılandırıcısıdır. Bu sınıf, oyunun başlangıcında ve sonunda gerekli ayarlamaları yapar.
-   - `Awake()` yöntemi, oyunun başlatılmasından önce gerekli bileşenleri oluşturur ve hazırlar.
-   - `Start()` yöntemi, oyun başladığında `AppState`'in etkinleştirilmesini sağlar.
-   - `Update()` yöntemi, her güncelleme döngüsünde `AppState`'in güncellenmesini sağlar.
-   - `OnApplicationQuit()` yöntemi, uygulama kapatıldığında temizlik işlemlerini gerçekleştirir.
+1. **GameInstaller Class**:
+   - The `GameInstaller` class serves as the main configurator of the game, handling necessary setups at the beginning and end.
+   - The `Awake()` method creates and prepares required components before the game starts.
+   - The `Start()` method activates the `AppState` when the game begins.
+   - The `Update()` method ensures the updating of the `AppState` in every update loop.
+   - The `OnApplicationQuit()` method performs cleanup operations when the application is closed.
 
-2. **AppState Sınıfı**:
-   - `AppState`, oyunun ana durum makinesidir. Oyunun farklı durumlarını (loading, lobby, game) yönetir.
-   - `AppState`, `LoadingState`, `LobbyState`, ve `GameState` olmak üzere üç alt durumu yönetir.
-   - `LoadingState`, oyun yüklenirken bir yükleme ekranı gösterir.
-   - `LobbyState`, oyuncunun lobi arayüzünde dolaşmasını sağlar ve seviye başlatma gibi eylemleri gerçekleştirir.
-   - `GameState`, oyunun ana oyun akışını yönetir ve `PrepareGameState`, `InGameState`, `LevelCompleteState`, ve `LevelFailState` alt durumlarını yönetir.
+2. **AppState Class**:
+   - `AppState` serves as the main state machine of the game, managing different states such as loading, lobby, and game.
+   - It manages three sub-states: `LoadingState`, `LobbyState`, and `GameState`.
+   - `LoadingState` displays a loading screen while the game is loading.
+   - `LobbyState` allows the player to navigate in the lobby interface and perform actions like starting levels.
+   - `GameState` manages the main gameplay flow and controls sub-states like `PrepareGameState`, `InGameState`, `LevelCompleteState`, and `LevelFailState`.
 
-3. **InGameState Sınıfı**:
-   - `InGameState`, oyunun ana oyun durumunu yönetir. Oyuncunun oyun alanında etkileşimde bulunmasını sağlar.
-   - `InGameState`, `IdleState`, `OnMouseDownState`, ve `OnMouseUpState` alt durumlarını yönetir.
-   - Fare etkileşimlerini işleyen alt durumlar, oyuncunun fare tıklamalarına göre koleksiyonları işler.
+3. **InGameState Class**:
+   - `InGameState` manages the core gameplay state, enabling player interaction within the game environment.
+   - It handles sub-states like `IdleState`, `OnMouseDownState`, and `OnMouseUpState`.
+   - Sub-states processing mouse interactions handle player actions based on mouse clicks.
 
-4. **LevelCompleteState ve LevelFailState Sınıfları**:
-   - Bu sınıflar, oyunun tamamlanma veya başarısızlık durumlarını yönetir.
-   - `LevelCompleteState`, seviye tamamlandığında oyuncuya geri bildirim sağlar ve bir sonraki adıma geçmesi için seçenekler sunar.
-   - `LevelFailState`, seviye başarısız olduğunda oyuncuya geri bildirim sağlar ve tekrar denemesi veya lobiye dönmesi için seçenekler sunar.
+4. **LevelCompleteState and LevelFailState Classes**:
+   - These classes manage the completion or failure states of the game.
+   - `LevelCompleteState` provides feedback to the player upon level completion and offers options to proceed to the next step.
+   - `LevelFailState` provides feedback to the player upon level failure and offers options to retry or return to the lobby.
 
-Bu adımlar, oyunun ana akışını ve durumlar arasındaki geçişleri özetlemektedir. Oyunun daha spesifik işlevleri veya durumları varsa, bu yapıya daha fazla alt durum ve işlev eklenebilir. Ancak, yukarıda belirtilen yapı, genel bir oyun akışını anlamak için yeterli bir çerçeve sağlar.
+These steps summarize the main flow of the game and transitions between states. Additional sub-states and functionalities can be added to this structure to accommodate specific features or states of the game. However, the outlined structure provides a sufficient framework for understanding the general flow of the game.
 
-**ComponentContainer Sınıfı ve Bağımlılık Yönetimi**
+**ComponentContainer Class and Dependency Management**
 
-1. **ComponentContainer Sınıfı**:
-   - `ComponentContainer`, oyun içinde kullanılan bileşenlerin yönetimini sağlayan bir sınıftır.
-   - Bu sınıf, oyun içindeki farklı bileşenlerin eklenmesini, çözümlenmesini ve yönetilmesini sağlar.
-   - `AddComponent()` yöntemi, belirli bir bileşeni ekler ve ilgili arayüzleri uygular. Bu bileşenler genellikle `IInitializable`, `IStartable`, `IUpdatable`, ve `IDisposable` arayüzlerini uygular.
-   - `Resolve()` yöntemi, henüz eklenmemiş bir bileşeni ekler.
-   - `GetComponent()` yöntemi, belirli bir türdeki bileşeni alır.
-   - `InitializeComponents()`, `StartComponents()`, `Update()`, ve `Dispose()` yöntemleri, sırasıyla bileşenlerin başlatılmasını, güncellenmesini ve temizlenmesini sağlar.
+1. **ComponentContainer Class**:
+   - `ComponentContainer` is a class responsible for managing components used within the game.
+   - It enables adding, resolving, and managing various components within the game.
+   - The `AddComponent()` method adds a specific component and implements relevant interfaces, typically `IInitializable`, `IStartable`, `IUpdatable`, and `IDisposable`.
+   - The `Resolve()` method adds a component that has not been added yet.
+   - The `GetComponent()` method retrieves a component of a specific type.
+   - Methods like `InitializeComponents()`, `StartComponents()`, `Update()`, and `Dispose()` handle the initialization, updating, and cleaning up of components, respectively.
 
-2. **Bağımlılık Yönetimi**:
-   - `ComponentContainer`, bağımlılıkların yönetilmesini sağlar. Bu, farklı bileşenlerin birbirine bağlı olduğu durumları ele alır.
-   - Her bileşenin, ilgili arayüzleri uygulayarak, hangi durumlarda başlatılacağı, güncelleneceği veya temizleneceği belirtilir.
-   - Bu yapı, bileşenler arasındaki bağımlılıkları yönetir ve sınıflar arasındaki etkileşimi kolaylaştırır.
-   - Bileşenlerin otomatik olarak başlatılması, güncellenmesi ve temizlenmesi gibi işlevler, bu yapı sayesinde merkezi olarak yönetilir.
+2. **Dependency Management**:
+   - `ComponentContainer` manages dependencies, handling situations where different components are interdependent.
+   - Each component specifies when it should be initialized, updated, or disposed of by implementing relevant interfaces.
+   - This structure manages dependencies between components, facilitating interaction between classes.
+   - Functions such as automatic initialization, updating, and disposal of components are centrally managed through this structure.
 
-Bu sınıf, oyun içindeki bileşenler arasındaki bağımlılıkları yönetmek ve bileşenlerin doğru bir şekilde başlatılmasını, güncellenmesini ve temizlenmesini sağlamak için kullanılır. Bu, oyunun genel performansını artırır ve kod tekrarını azaltır.
+This class is used to manage dependencies between components within the game and ensure proper initialization, updating, and disposal of components. This enhances the overall performance of the game and reduces code repetition.
 
-**StateMachine Sınıfı ve Durum Yönetimi**
+**StateMachine Class and State Management**
 
-1. **StateMachine Sınıfı**:
-   - `StateMachine`, oyun içindeki durumları yöneten soyut bir sınıftır.
-   - Bu sınıf, durumlar arasındaki geçişleri kontrol eder ve her durumun giriş, güncelleme ve çıkış işlemlerini yönetir.
-   - `Enter()`, `Update()`, ve `Exit()` yöntemleri, sırasıyla bir durumun başlatılmasını, güncellenmesini ve sonlandırılmasını sağlar.
-   - `AddTransition()`, belirli bir durumda bir tetikleyiciye bağlı olarak başka bir duruma geçişi ekler.
-   - `AddSubState()`, alt durumları ekler ve varsayılan bir alt durum belirler.
-   - `SendTrigger()`, belirli bir tetikleyiciyi kullanarak bir durum değişikliği talebi gönderir.
+1. **StateMachine Class**:
+   - `StateMachine` is an abstract class responsible for managing states within the game.
+   - It controls transitions between states and manages entry, update, and exit operations for each state.
+   - The `Enter()`, `Update()`, and `Exit()` methods handle the initialization, updating, and termination of states, respectively.
+   - The `AddTransition()` method adds a transition from one state to another based on a trigger in a specific state.
+   - The `AddSubState()` method adds sub-states and defines a default sub-state.
+   - The `SendTrigger()` method sends a request for a state change using a specific trigger.
 
-2. **Durum Yönetimi**:
-   - `StateMachine`, durumların hiyerarşik bir yapısını sağlar. Her durum altında bir veya daha fazla alt durum bulunabilir.
-   - Durumlar arasındaki geçişler, tetikleyiciler ve hedef durumlar arasında tanımlanır.
-   - Her durum, başlatma, güncelleme ve sonlandırma işlemlerini yönetir. Bu işlemler, oyun durumunu yönetmek için temel işlevlerdir.
-   - Durumlar, soyut `OnEnter()`, `OnUpdate()`, ve `OnExit()` yöntemlerini uygulayarak özelleştirilebilir.
-   - Durumlar arasındaki geçişler, durumlar arasındaki ilişkileri ve oyunun akışını kontrol eder. Bu, oyunun farklı bölümleri arasındaki geçişleri yönetmek için önemlidir.
+2. **State Management**:
+   - `StateMachine` provides a hierarchical structure for states, where each state can have one or more sub-states.
+   - Transitions between states are defined using triggers and target states.
+   - Each state manages entry, update, and exit operations, which are fundamental functions for managing the game state.
+   - States can be customized by implementing abstract methods like `OnEnter()`, `OnUpdate()`, and `OnExit()`.
+   - Transitions between states control relationships between states and manage the flow of the game. This is essential for managing transitions between different sections of the game.
 
-Bu sınıf, oyun içindeki farklı durumları (örneğin, loading, lobby, game) yönetmek için kullanılır. Her durum, oyunun belirli bir bölümünü temsil eder ve bu bölümdeki işlevleri ve geçişleri kontrol eder. Bu, oyunun genel akışını organize etmek için kullanılan güçlü bir araçtır.
+This class is used to manage different states (e.g., loading, lobby, game) within the game. Each state represents a specific section of the game and controls functions and transitions within that section. It is a powerful tool for organizing the overall flow of the game.

@@ -1,5 +1,3 @@
-Tabii, daha detaylı bir şekilde anlatalım:
-
 1. **GameInstaller Sınıfı**:
    - `GameInstaller` sınıfı, oyunun ana yapılandırıcısıdır. Bu sınıf, oyunun başlangıcında ve sonunda gerekli ayarlamaları yapar.
    - `Awake()` yöntemi, oyunun başlatılmasından önce gerekli bileşenleri oluşturur ve hazırlar.
@@ -23,5 +21,3 @@ Tabii, daha detaylı bir şekilde anlatalım:
    - Bu sınıflar, oyunun tamamlanma veya başarısızlık durumlarını yönetir.
    - `LevelCompleteState`, seviye tamamlandığında oyuncuya geri bildirim sağlar ve bir sonraki adıma geçmesi için seçenekler sunar.
    - `LevelFailState`, seviye başarısız olduğunda oyuncuya geri bildirim sağlar ve tekrar denemesi veya lobiye dönmesi için seçenekler sunar.
-
-Bu adımlar, oyunun ana akışını ve durumlar arasındaki geçişleri özetlemektedir. Oyunun daha spesifik işlevleri veya durumları varsa, bu yapıya daha fazla alt durum ve işlev eklenebilir. Ancak, yukarıda belirtilen yapı, genel bir oyun akışını anlamak için yeterli bir çerçeve sağlar.

@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25dd5652a4e0469d931d9e60f80d1246, type: 3}
+  m_Name: LevelContainer
+  m_EditorClassIdentifier: 
+  _objects:
+  - {fileID: 11400000, guid: 8856264fe101d534294d1d19a299080b, type: 2}
+  - {fileID: 11400000, guid: f56731c1585be2241a1980ebb2f5f737, type: 2}
+  - {fileID: 11400000, guid: a7a95660677473e41bb2971d9d3be163, type: 2}
+  - {fileID: 11400000, guid: d16ca8418aefc244cab88427d8e6b943, type: 2}
+  _levels:
+  - duration: 100
+    goals:
+    - desiredAmount: 12
+      desiredObject: {fileID: 11400000, guid: f56731c1585be2241a1980ebb2f5f737, type: 2}
+    optionals:
+    - _object: {fileID: 11400000, guid: a7a95660677473e41bb2971d9d3be163, type: 2}
+      amount: 25
+    - _object: {fileID: 11400000, guid: d16ca8418aefc244cab88427d8e6b943, type: 2}
+      amount: 30
+    - _object: {fileID: 11400000, guid: 8856264fe101d534294d1d19a299080b, type: 2}
+      amount: 25
+    totalCollectableObjectCount: 48
+  - duration: 100
+    goals:
+    - desiredAmount: 12
+      desiredObject: {fileID: 11400000, guid: f56731c1585be2241a1980ebb2f5f737, type: 2}
+    - desiredAmount: 12
+      desiredObject: {fileID: 11400000, guid: 8856264fe101d534294d1d19a299080b, type: 2}
+    optionals:
+    - _object: {fileID: 11400000, guid: d16ca8418aefc244cab88427d8e6b943, type: 2}
+      amount: 35
+    - _object: {fileID: 11400000, guid: a7a95660677473e41bb2971d9d3be163, type: 2}
+      amount: 40
+    totalCollectableObjectCount: 66
+  - duration: 100
+    goals:
+    - desiredAmount: 12
+      desiredObject: {fileID: 11400000, guid: f56731c1585be2241a1980ebb2f5f737, type: 2}
+    - desiredAmount: 12
+      desiredObject: {fileID: 11400000, guid: 8856264fe101d534294d1d19a299080b, type: 2}
+    - desiredAmount: 12
+      desiredObject: {fileID: 11400000, guid: a7a95660677473e41bb2971d9d3be163, type: 2}
+    optionals:
+    - _object: {fileID: 11400000, guid: d16ca8418aefc244cab88427d8e6b943, type: 2}
+      amount: 50
+    totalCollectableObjectCount: 66
+  - duration: 100
+    goals:
+    - desiredAmount: 12
+      desiredObject: {fileID: 11400000, guid: d16ca8418aefc244cab88427d8e6b943, type: 2}
+    - desiredAmount: 12
+      desiredObject: {fileID: 11400000, guid: 8856264fe101d534294d1d19a299080b, type: 2}
+    - desiredAmount: 12
+      desiredObject: {fileID: 11400000, guid: f56731c1585be2241a1980ebb2f5f737, type: 2}
+    optionals:
+    - _object: {fileID: 11400000, guid: a7a95660677473e41bb2971d9d3be163, type: 2}
+      amount: 60
+    totalCollectableObjectCount: 57

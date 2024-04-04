@@ -23,6 +23,7 @@ namespace Game
 
         private void Awake()
         {
+            Application.targetFrameRate = 60;
             CreateComponentContainer();
             CreatePoolManager();
             RegisterSceneObjects();
